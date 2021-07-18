@@ -7,30 +7,32 @@ import React from "react";
 let App = () => {
 
   const [messages, setMessages] = useState([
-      {author : "mixa", text : "Привет"},
-      {author : "toxa", text : "Хай , мэн"},
-      {author : "lexa", text : "Аллоха!"},
+      {author : "mixa", text : "Привет", ai: false},
+      {author : "toxa", text : "Хай , мэн", ai: false},
+      {author : "ROBOT", text : "Смерть кожаными мешкам", ai: true},
+      {author : "lexa", text : "Аллоха!", ai: false},
         ]);
 
     let messagesArr = messages.map(el => <Message state={el} />)
-    console.log(typeof messages)
-    let setMessage = (message) => {
-        setMessages (messages.push({author: 'mixa', text: message}));
-        debugger
-        console.log(messages) //проверил, пушит в стейт!
-    }
 
-    // useEffect(() => {
-    //     console.log(`11111`);
-    //
-    // }, [messages]);
+    let setMessage = (message, login) => {
+        let arr = [];
+        arr.push({author: login, text: message, ai:false});
+        setMessages (messages.concat(arr));
+        if (login == "mixa"){
+            arr.push({author: 'ROBOT', text: "Человек Миха детектед!", ai:true});
+            setMessages (messages.concat(arr));
+        }
+    }
+    // useEffect( ()=> {
+    //     console.log('Тест');
+    // }, messages[messages.length-1].author)
 
 
     return (
 
     <div className="App">
-
-        {messagesArr} {/*на повторном вызове ,, после добавления ругается "TypeError: messages.map is not a function*/}
+        {messagesArr}
 
         <Form setmessage={setMessage} />
     </div>
