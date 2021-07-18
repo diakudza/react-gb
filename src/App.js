@@ -21,7 +21,7 @@ let App = () => {
         setMessages (messages.concat(arr));
         if (login == "mixa"){
             arr.push({author: 'ROBOT', text: "Человек Миха детектед!", ai:true});
-            setMessages (messages.concat(arr));
+            setTimeout(() => { setMessages (messages.concat(arr)) }, 2000 );
         }
     }
     // useEffect( ()=> {
