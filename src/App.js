@@ -25,8 +25,11 @@ let App = () => {
         }
     }
     // useEffect( ()=> {
-    //     console.log('Тест');
-    // }, messages[messages.length-1].author)
+    // if (login == "mixa"){ setTimeout(()=>{
+    //     setMessages(messages.concat({author: 'ROBOT', text: "Человек Миха детектед!", ai:true}));
+    // }, (Math.random()*2)*1000)
+    //
+    // }}, messages.author)
 
 
     return (
