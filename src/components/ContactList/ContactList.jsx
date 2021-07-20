@@ -1,15 +1,17 @@
 import React from "react";
 import '../../App.css';
+import FriendCart from "./FriendCart/FriendCart";
+import List from '@material-ui/core/List';
 
 const ContactList = (props) => {
+    console.log(props)
+    let ContactList = props.state.friends.map((friend)=> <FriendCart friend={friend}/>)
     return (
-        <>
-            1
-            2
-            3
-            4
-            56
-        </>
+        
+        <List>
+            {ContactList}
+        </List>    
+        
     );
 }
 

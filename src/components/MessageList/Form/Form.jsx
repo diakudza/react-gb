@@ -1,6 +1,7 @@
 import React from "react";
 import '../../../App.css';
 import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField';
 
 const Form = (props) => {
     console.log(props)
@@ -16,10 +17,23 @@ const Form = (props) => {
         textValue.current.value = '';
     }
 
+  //   const handleChange = (prop) => (event) => {
+  //   setValues({ ...values, [prop]: event.target.value });
+  // };
+
     return (
         <form className="form">
-            <div><textarea ref={textValue}>Some text </textarea></div>
-            <input ref={loginValue} type="text" placeholder="author"/>
+        <TextField
+          id="outlined-textarea"
+          label="Ваше вообщение"
+          placeholder="Ваше сообщение"
+          multiline
+          variant="outlined"
+          ref={textValue}
+        />
+            {/*<textarea ref={textValue}>Some text </textarea>*/}
+           {/* <input ref={loginValue} type="text" placeholder="author"/>*/}
+            <TextField id="outlined-basic" ref={loginValue} label="author" variant="outlined" />
             <Button variant="contained" onClick={setMessage} color="primary">
                 Отправить
             </Button>

@@ -30,7 +30,7 @@ let App = (props) => {
             <Grid container spacing={2}>
                 <Grid item xs={2}>
                     <Paper elevation={3}>
-                        <ContactList/>
+                        <ContactList state={props.state}/>
                     </Paper>
                 </Grid>
                 <Grid item xs={10}>
