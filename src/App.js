@@ -1,47 +1,47 @@
 import './App.css';
-import Message from "./components/Message/Message";
-import {useState, useEffect} from "react";
-import Form from "./components/Form/Form";
 import React from "react";
+import ContactList from "./components/ContactList/ContactList";
+import MessageList from "./components/MessageList/MessageList";
+import {state} from "./state";
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import {makeStyles} from '@material-ui/core/styles';
 
+const useStyles = makeStyles((theme) => ({
+    root: {
+        display: 'flex',
 
-let App = () => {
+        flexWrap: 'wrap',
+        '& > *': {
+            margin: theme.spacing(1),
+            width: theme.spacing(16),
+            height: theme.spacing(16),
+        },
+    },
+}));
 
-  const [messages, setMessages] = useState([
-      {author : "mixa", text : "Привет", ai: false},
-      {author : "toxa", text : "Хай , мэн", ai: false},
-      {author : "ROBOT", text : "Смерть кожаными мешкам", ai: true},
-      {author : "lexa", text : "Аллоха!", ai: false},
-        ]);
+let App = (props) => {
 
-    let messagesArr = messages.map(el => <Message state={el} />)
-
-    let setMessage = (message, login) => {
-        let arr = [];
-        arr.push({author: login, text: message, ai:false});
-        setMessages (messages.concat(arr));
-        if (login == "mixa"){
-            arr.push({author: 'ROBOT', text: "Человек Миха детектед!", ai:true});
-            setTimeout(() => { setMessages (messages.concat(arr)) }, 2000 );
-        }
-    }
-    // useEffect( ()=> {
-    // if (login == "mixa"){ setTimeout(()=>{
-    //     setMessages(messages.concat({author: 'ROBOT', text: "Человек Миха детектед!", ai:true}));
-    // }, (Math.random()*2)*1000)
-    //
-    // }}, messages.author)
-
-
+    // debugger
+    console.log(props)
     return (
 
-    <div className="App">
-        {messagesArr}
+        <div className="App">
+            <Grid container spacing={2}>
+                <Grid item xs={2}>
+                    <Paper elevation={3}>
+                        <ContactList/>
+                    </Paper>
+                </Grid>
+                <Grid item xs={10}>
+                    <Paper elevation={3}>
+                        <MessageList state={props.state} setMessage={props.setMessage.bind(state)}/>
+                    </Paper>
+                </Grid>
+            </Grid>
+        </div>
 
-        <Form setmessage={setMessage} />
-    </div>
-
-  );
+    );
 }
 
 export default App;

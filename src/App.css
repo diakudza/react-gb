@@ -1,6 +1,6 @@
 .App {
-  margin: 0 auto;
-  width: 800px;
+
+
   padding: 40px;
   text-align: center;
   display: flex;
@@ -9,6 +9,6 @@
 }
 
 .form {
-  width: 800px;
+  width: 100%;
   background: blanchedalmond;
 }

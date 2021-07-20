@@ -1,14 +1,16 @@
 import React from "react";
-import '../../App.css';
+import '../../../App.css';
+import Button from '@material-ui/core/Button'
 
 const Form = (props) => {
-
+    console.log(props)
     let textValue = React.createRef();
     let loginValue = React.createRef();
-    let addPost = (event) => {
+    let setMessage = (event) => {
+        debugger
         let text = textValue.current.value;
         let login = loginValue.current.value;
-        props.setmessage(text, login);
+        props.setMessage(text, login);
         //alert(text);
         event.preventDefault();
         textValue.current.value = '';
@@ -18,7 +20,9 @@ const Form = (props) => {
         <form className="form">
             <div><textarea ref={textValue}>Some text </textarea></div>
             <input ref={loginValue} type="text" placeholder="author"/>
-            <button onClick={addPost}>Отправить</button>
+            <Button variant="contained" onClick={setMessage} color="primary">
+                Отправить
+            </Button>
         </form>
     );
 }
