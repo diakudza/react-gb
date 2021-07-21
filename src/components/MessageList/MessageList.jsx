@@ -6,7 +6,7 @@ import s from "../../App.css"
 
 const MessageList = (props) => {
     console.log(props)
-    let messagesArr = props.state.messages.map((el, index) => <Message key={index} state={el}/>)
+    let messagesArr = props.messages.map((el, index) => <Message key={index} props={el}/>)
 
 
     return (

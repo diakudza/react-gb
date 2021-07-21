@@ -4,9 +4,9 @@ import Card from '@material-ui/core/Card';
 const Message = (props) => {
     return (
 
-        <div className={props.state.ai ? s.messageAI : s.message}>
-            <div>Имя : {props.state.author}</div>
-            <div>Сообщение : {props.state.text}</div>
+        <div className={props.ai ? s.messageAI : s.message}>
+            <div>Имя : {props.author}</div>
+            <div>Сообщение : {props.text}</div>
         </div>
     );
 
