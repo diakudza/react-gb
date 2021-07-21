@@ -14,7 +14,7 @@ let App = () => {
         setMessages([...messages, {author: "mixa", text: message, ai: false}])
     }
 
-    let sendMessageFromRobot = (message) => {
+    let sendMessageFromRobot = (message, delay=1000) => {
         setTimeout(() => {
             setMessages([...messages, {author: "ROBOT", text: message, ai: true}])
         }, (Math.random() * 2) * 1000)
@@ -23,17 +23,16 @@ let App = () => {
     useEffect(() => {
         if (messages[messages.length - 1].author !== 'ROBOT') {
             let lastMessage = messages[messages.length - 1].text
-            sendMessageFromRobot(`Я не пойму "${lastMessage}" ,что ты имеешь в виду?`)
+            if (lastMessage == '') {
+                messages.pop()
+                setMessages(messages)
+                sendMessageFromRobot(`А зачем пустоту слать?`,0)
+            } else {
+                sendMessageFromRobot(`Я не пойму "${lastMessage}" ,что ты имеешь в виду?`)
+                }
         }
     }, [messages])
 
-    useEffect(() => {
-        if (messages[messages.length - 1].text == '') {
-            messages.pop()
-            setMessages(messages)
-            sendMessageFromRobot(`А зачем пустоту слать?`)
-        }
-    }, [messages[messages.length - 1].text])
 
     return (
 
