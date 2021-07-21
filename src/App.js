@@ -6,41 +6,37 @@ import React from "react";
 
 let App = () => {
 
-  const [messages, setMessages] = useState([
-      {author : "mixa", text : "Привет", ai: false},
-      {author : "toxa", text : "Хай , мэн", ai: false},
-      {author : "ROBOT", text : "Смерть кожаными мешкам", ai: true},
-      {author : "lexa", text : "Аллоха!", ai: false},
-        ]);
+    const [messages, setMessages] = useState([{author: "ROBOT", text: "Привет, Миха", ai: true}]);
 
-    let messagesArr = messages.map(el => <Message state={el} />)
+    let messagesArr = messages.map((el,index) => <Message key={index} state={el}/>)
 
-    let setMessage = (message, login) => {
-        let arr = [];
-        arr.push({author: login, text: message, ai:false});
-        setMessages (messages.concat(arr));
-        if (login == "mixa"){
-            arr.push({author: 'ROBOT', text: "Человек Миха детектед!", ai:true});
-            setTimeout(() => { setMessages (messages.concat(arr)) }, 2000 );
+    let setMessage = (message) => {
+        if (message !== "") {
+            setMessages([...messages, {author: "mixa", text: message, ai: false}])
+        } else {
+            setTimeout(() => {
+                setMessages([...messages, {author: "ROBOT", text: `Зачем отправляешь пустоту?`, ai: true}])
+            }, (Math.random() * 2) * 1000)
         }
     }
-    // useEffect( ()=> {
-    // if (login == "mixa"){ setTimeout(()=>{
-    //     setMessages(messages.concat({author: 'ROBOT', text: "Человек Миха детектед!", ai:true}));
-    // }, (Math.random()*2)*1000)
-    //
-    // }}, messages.author)
+
+    useEffect(() => {
+        if (messages[messages.length - 1].author !== 'ROBOT' ) {
+            let lastMessage = messages[messages.length - 1].text
+            setTimeout(() => {
+                setMessages([...messages, {author: "ROBOT", text: ` Я не пойму "${lastMessage}" , что ты имеешь в виду?`, ai: true}])
+            }, (Math.random() * 2) * 1000)
+        }
+    }, [messages])
 
 
     return (
 
-    <div className="App">
-        {messagesArr}
-
-        <Form setmessage={setMessage} />
-    </div>
-
-  );
+        <div className="App">
+            {messagesArr}
+            <Form setmessage={setMessage}/>
+        </div>
+    );
 }
 
 export default App;

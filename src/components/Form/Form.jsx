@@ -1,23 +1,20 @@
 import React from "react";
 import '../../App.css';
+
 const Form = (props) => {
 
-    let textValue = React.createRef();
-    let loginValue = React.createRef();
+    let textValue = React.useRef();
     let addPost = (event) => {
         let text = textValue.current.value;
-        let login = loginValue.current.value;
-        props.setmessage(text,login);
-        //alert(text);
+        props.setmessage(text);
         event.preventDefault();
         textValue.current.value = '';
     }
 
     return (
         <form className="form">
-           <div> <textarea ref={textValue} >Some text </textarea></div>
-            <input ref={loginValue} type="text" placeholder="author"/>
-            <button onClick={addPost}>Отправить</button>
+           <input ref={textValue} placeholder="Текст сообщения"/>
+           <button onClick={addPost}>Отправить</button>
         </form>
     );
 }
