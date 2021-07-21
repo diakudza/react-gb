@@ -6,9 +6,14 @@ const Form = (props) => {
     let textValue = React.useRef();
     let addPost = (event) => {
         let text = textValue.current.value;
+        if (text==''){
+            alert('Поле пустое!')
+            event.preventDefault();
+        } else {
         props.setmessage(text);
         event.preventDefault();
         textValue.current.value = '';
+        }
     }
 
     return (

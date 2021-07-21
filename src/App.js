@@ -23,13 +23,7 @@ let App = () => {
     useEffect(() => {
         if (messages[messages.length - 1].author !== 'ROBOT') {
             let lastMessage = messages[messages.length - 1].text
-            if (lastMessage == '') {
-                messages.pop()
-                setMessages(messages)
-                sendMessageFromRobot(`А зачем пустоту слать?`,0)
-            } else {
-                sendMessageFromRobot(`Я не пойму "${lastMessage}" ,что ты имеешь в виду?`)
-                }
+            sendMessageFromRobot(`Я не пойму "${lastMessage}" ,что ты имеешь в виду?`)
         }
     }, [messages])
 
