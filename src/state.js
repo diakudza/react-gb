@@ -1,6 +1,6 @@
 import React from "react";
 import { rerenderApp } from "./index";
-
+const LOGIN = 'mixa'
 export let state = {
     messages: [
         { author: "100", text: "Привет", ai: false },
@@ -15,14 +15,11 @@ export let state = {
         { id: 102, author: "lexa" , ava: '1.png'},
     ],
 
-    setMessage(message, login) {
+    setMessage(message) {
         debugger
         if (message != '' && message != 'Some text '){
-        this.messages.push({ author: login, text: message, ai: false });
-        this.messages.push({ author: 'ROBOT', text: `Человек ${login} детектед!`, ai: true })
-        // setTimeout(() => {
-        //         this.messages.push({author: 'ROBOT', text: `Человек ${login} детектед!`, ai: true})
-        //     }, 2000);
+        this.messages.push({ author: LOGIN, text: message, ai: false });
+        this.messages.push({ author: 'ROBOT', text: `Человек ${LOGIN} детектед!`, ai: true })
         } else {
             this.messages.push({ author: 'ROBOT', text: `Человек не отправляй пустоту!`, ai: true })
         }

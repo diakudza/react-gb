@@ -1,7 +1,7 @@
 import s from './Message.module.css';
+import Card from '@material-ui/core/Card';
 
 const Message = (props) => {
-
     return (
 
         <div className={props.state.ai ? s.messageAI : s.message}>

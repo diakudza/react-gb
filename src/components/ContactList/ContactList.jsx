@@ -5,7 +5,7 @@ import List from '@material-ui/core/List';
 
 const ContactList = (props) => {
     console.log(props)
-    let ContactList = props.state.friends.map((friend)=> <FriendCart friend={friend}/>)
+    let ContactList = props.state.friends.map((friend,index)=> <FriendCart key={index} friend={friend}/>)
     return (
         
         <List>

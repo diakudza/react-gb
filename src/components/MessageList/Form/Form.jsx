@@ -1,40 +1,34 @@
-import React from "react";
+import React, {useEffect} from "react";
 import '../../../App.css';
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField';
 
 const Form = (props) => {
     console.log(props)
-    let textValue = React.createRef();
-    let loginValue = React.createRef();
+    let textValue = React.useRef();
+
     let setMessage = (event) => {
         debugger
         let text = textValue.current.value;
-        let login = loginValue.current.value;
-        props.setMessage(text, login);
-        //alert(text);
+        props.setMessage(text);
         event.preventDefault();
         textValue.current.value = '';
     }
-
-  //   const handleChange = (prop) => (event) => {
-  //   setValues({ ...values, [prop]: event.target.value });
-  // };
+    useEffect(()=>{
+        textValue.current?.focus();
+    })
 
     return (
         <form className="form">
         <TextField
           id="outlined-textarea"
-          label="Ваше вообщение"
           placeholder="Ваше сообщение"
-          multiline
+          size="small"
           variant="outlined"
-          ref={textValue}
+          inputRef={textValue}
         />
-            {/*<textarea ref={textValue}>Some text </textarea>*/}
-           {/* <input ref={loginValue} type="text" placeholder="author"/>*/}
-            <TextField id="outlined-basic" ref={loginValue} label="author" variant="outlined" />
-            <Button variant="contained" onClick={setMessage} color="primary">
+
+           <Button variant="contained" onClick={setMessage} color="primary">
                 Отправить
             </Button>
         </form>
