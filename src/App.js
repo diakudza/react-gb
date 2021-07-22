@@ -2,36 +2,30 @@ import './App.css';
 import React, {useEffect, useState} from "react";
 import ContactList from "./components/ContactList/ContactList";
 import MessageList from "./components/MessageList/MessageList";
-import {state} from "./state";
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
-
-
 let App = (props) => {
 
-    console.log(props)
     const [messages, setMessages] = useState([{author: "ROBOT", text: "Привет, Миха", ai: true}]);
-    useEffect(() => {
-        debugger
-        if (messages[messages.length - 1].author !== 'ROBOT' ) {
-            let lastMessage = messages[messages.length - 1].text
-            setTimeout(() => {
-                setMessages([...messages, {author: "ROBOT", text: ` Я не пойму "${lastMessage}" , что ты имеешь в виду?`, ai: true}])
-            }, (Math.random() * 2) * 1000)
-        }
-    }, [props.state.messages])
 
-    const setMessage = (message) => {
+    let setMessage = (message) => {
         debugger
-        if (message != '' && message != 'Some text '){
-            setMessages([...messages, { author: 'mixa', text: message, ai: false }]);
-            setMessages([...messages, { author: 'ROBOT', text: `Человек детектед!`, ai: true }])
-        } else {
-            setMessages([...messages, { author: 'ROBOT', text: `Человек не отправляй пустоту!`, ai: true }])
-        }
-
+        setMessages([...messages, {author: "mixa", text: message, ai: false}])
     }
+
+    let sendMessageFromRobot = (message, delay=1000) => {
+        setTimeout(() => {
+            setMessages([...messages, {author: "ROBOT", text: message, ai: true}])
+        }, (Math.random() * 2) * 1000)
+    }
+
+    useEffect(() => {
+        if (messages[messages.length - 1].author !== 'ROBOT') {
+            let lastMessage = messages[messages.length - 1].text
+            sendMessageFromRobot(`Я не пойму "${lastMessage}" ,что ты имеешь в виду?`)
+        }
+    }, [messages])
 
     return (
         <div className="App">
@@ -43,7 +37,7 @@ let App = (props) => {
                 </Grid>
                 <Grid item xs={10}>
                     <div className="flexCol messageList" >
-                        <MessageList props={messages} setMessage={setMessage}/>
+                        <MessageList messages={messages} setMessage={setMessage}/>
                     </div>
                 </Grid>
             </Grid>

@@ -6,6 +6,7 @@
   padding: 20px;
   border-radius: 30px;
   align-self: flex-end;
+  box-shadow: 2px 1px 5px 0px;
 }
 
 .messageAI{
@@ -16,4 +17,5 @@
   padding: 20px;
   border-radius: 30px;
   align-self: flex-start;
+  box-shadow: 2px 1px 5px 0px;
 }

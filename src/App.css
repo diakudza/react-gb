@@ -16,14 +16,16 @@
   height: 1vh;
 }
 
-.flexCol {
-  display: flex;
-  flex-direction: column;
-}
+
 .flexRow {
   display: flex;
   flex-direction: row;
 }
 .padding20 {
   padding: 20px;
+}
+.flexCol {
+  display: flex !important;
+  flex-direction: column;
+
 }
