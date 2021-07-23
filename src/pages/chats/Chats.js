@@ -5,8 +5,9 @@ import Paper from '@material-ui/core/Paper';
 import ContactList from "./ContactList/ContactList";
 import MessageList from "./MessageList/MessageList";
 
-let App = (props) => {
-console.log(props)
+let Chats = (props) => {
+
+// console.log(props)
     const [messages, setMessages] = useState([{author: "ROBOT", text: "Привет, Миха", ai: true}]);
 
     let setMessage = (message) => {
@@ -27,7 +28,7 @@ console.log(props)
     }, [messages])
 
     return (
-        <div className="App">
+        <div className="padding020">
             <h2>Сообщения</h2>
             <Grid container spacing={2}>
                 <Grid item xs={2}>{/*Список контактов*/}
@@ -44,4 +45,4 @@ console.log(props)
     );
 }
 
-export default App;
+export default Chats;
