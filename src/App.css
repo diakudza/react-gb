@@ -1,16 +1,18 @@
 .App {
-
-
   padding: 40px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 1vh;
 }
+
+
 
 .form {
   width: 100%;
-  background: blanchedalmond;
+   height: 40px;
+  align-self: flex-end;
 }
 .messageList {
   height: 1vh;

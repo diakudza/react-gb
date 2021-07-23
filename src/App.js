@@ -1,48 +1,62 @@
 import './App.css';
 import React, {useEffect, useState} from "react";
-import ContactList from "./components/ContactList/ContactList";
-import MessageList from "./components/MessageList/MessageList";
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
+import {BrowserRouter as Router, Route, useParams} from "react-router-dom";
 
-let App = (props) => {
+import Navbar from "./components/Navbar";
+import Home from "./pages/home/Home";
+import Profile from "./pages/profile/Profile";
+import Chats from "./pages/chats/Chats";
 
-    const [messages, setMessages] = useState([{author: "ROBOT", text: "Привет, Миха", ai: true}]);
+let App = () => {
 
-    let setMessage = (message) => {
-        debugger
-        setMessages([...messages, {author: "mixa", text: message, ai: false}])
-    }
-
-    let sendMessageFromRobot = (message, delay=1000) => {
-        setTimeout(() => {
-            setMessages([...messages, {author: "ROBOT", text: message, ai: true}])
-        }, (Math.random() * 2) * 1000)
-    }
-
-    useEffect(() => {
-        if (messages[messages.length - 1].author !== 'ROBOT') {
-            let lastMessage = messages[messages.length - 1].text
-            sendMessageFromRobot(`Я не пойму "${lastMessage}" ,что ты имеешь в виду?`)
-        }
-    }, [messages])
+    // const [messages, setMessages] = useState([{author: "ROBOT", text: "Привет, Миха", ai: true}]);
+    const [chats, setChats] = useState(
+        {
+            chats: [
+                {author: 100, text: "Привет", ai: false},
+                {author: 101, text: "Хай , мэн", ai: false},
+                {author: 101, text: "Как сам?", ai: false},
+                {author: 101, text: "Иди ты", ai: false},
+                {author: 110, text: "Смерть кожаными мешкам", ai: true},
+                {author: 102, text: "Аллоха!", ai: false},
+                {author: 103, text: "Привки!", ai: false},
+                {author: 104, text: "Аллоха!", ai: false},
+                {author: 105, text: "Надо увидиться , есть тема !!", ai: false},
+                {author: 106, text: "Аллоха!", ai: false},
+                {author: 107, text: "Аллоха!", ai: false},
+            ]
+            ,
+            friends: [
+                {id: 110, author: "Robot", ava: ''},
+                {id: 100, author: "mixa", ava: '1.png'},
+                {id: 101, author: "toxa", ava: '2.png'},
+                {id: 102, author: "lexa", ava: '5.png'},
+                {id: 103, author: "Anna", ava: '2.png'},
+                {id: 104, author: "Janna", ava: '5.png'},
+                {id: 105, author: "Kolia", ava: '2.png'},
+                {id: 106, author: "Roman", ava: '5.png'},
+            ],
+            currentChat: [{author: "ROBOT", text: "Привет, Миха", ai: true}]
+        });
 
     return (
-        <div className="App">
-            <Grid container spacing={2}>
-                <Grid item xs={2}>
-                    <Paper elevation={3}>
-                        <ContactList state={props.state}/>
-                    </Paper>
-                </Grid>
-                <Grid item xs={10}>
-                    <div className="flexCol messageList" >
-                        <MessageList messages={messages} setMessage={setMessage}/>
-                    </div>
-                </Grid>
-            </Grid>
-        </div>
+
+        <Router>
+            <Navbar/>
+            <Route exact path="/" component={Home}/>
+            <Route path="/Profile" component={Profile}/>
+            <Route path="/Chats" render={() => <Chats chats={chats}/>}>
+                <switch>
+                    <Route path="/Chat/:id"
+                           render={(id)=>{
+                               console.log(id)
+                               const {}=useParams();
+                           }}
+                </switch>
+            </Route>
+        </Router>
+
     );
-}
+};
 
 export default App;
