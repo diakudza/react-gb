@@ -1,5 +1,4 @@
 import React from "react";
-// import s from "./FriendCard.css"
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -9,15 +8,14 @@ import {NavLink} from "react-router-dom";
 
 
 const FriendCart = (props) => {
-    // console.log(props)
-    let lastMessage = props.chats.filter(mes => mes.author == props.friend.id)
+    console.log(props)
+    let lastMessage = props.chats[props.friend.id].filter(mes => mes.author == props.friend.id)
     let countOfMessage = lastMessage.length
     lastMessage = lastMessage[lastMessage.length - 1]
     if (lastMessage.text.length > 15) {
         lastMessage.text = lastMessage.text.substr(0, 15) + "...."
     }
-
-    console.log(lastMessage)
+    //console.log(lastMessage)
     return (
         <>
            <NavLink to={"Chats/"+props.friend.id}>
@@ -32,7 +30,8 @@ const FriendCart = (props) => {
                                 {lastMessage.text}
                             </React.Fragment>
                         }
-                    />{countOfMessage}
+                    />
+                    {countOfMessage}
                 </ListItem>
             </NavLink>
             <Divider variant="inset" component="li"/>
