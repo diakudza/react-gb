@@ -1,16 +1,16 @@
 import './App.css';
-import React, {useEffect, useState} from "react";
-import ContactList from "./components/ContactList/ContactList";
-import MessageList from "./components/MessageList/MessageList";
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
+import Message from "./components/Message/Message";
+import {useState, useEffect} from "react";
+import Form from "./components/Form/Form";
+import React from "react";
 
-let App = (props) => {
+let App = () => {
 
     const [messages, setMessages] = useState([{author: "ROBOT", text: "Привет, Миха", ai: true}]);
 
+    let messagesArr = messages.map((el, index) => <Message key={index} state={el}/>)
+
     let setMessage = (message) => {
-        debugger
         setMessages([...messages, {author: "mixa", text: message, ai: false}])
     }
 
@@ -27,20 +27,12 @@ let App = (props) => {
         }
     }, [messages])
 
+
     return (
+
         <div className="App">
-            <Grid container spacing={2}>
-                <Grid item xs={2}>
-                    <Paper elevation={3}>
-                        <ContactList state={props.state}/>
-                    </Paper>
-                </Grid>
-                <Grid item xs={10}>
-                    <div className="flexCol messageList" >
-                        <MessageList messages={messages} setMessage={setMessage}/>
-                    </div>
-                </Grid>
-            </Grid>
+            {messagesArr}
+            <Form setmessage={setMessage}/>
         </div>
     );
 }
