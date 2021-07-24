@@ -1,7 +1,31 @@
 .App {
+
+
   padding: 40px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.form {
+  width: 100%;
+  background: blanchedalmond;
+}
+.messageList {
+  height: 1vh;
+}
+
+
+.flexRow {
+  display: flex;
+  flex-direction: row;
+}
+.padding20 {
+  padding: 20px;
+}
+.flexCol {
+  display: flex !important;
+  flex-direction: column;
+
 }
