@@ -8,23 +8,22 @@ import {NavLink} from "react-router-dom";
 
 
 const FriendCart = (props) => {
-    console.log(props)
-    let lastMessage = props.chats[props.friend.id].filter(mes => mes.author == props.friend.id)
-    let countOfMessage = lastMessage.length
-    lastMessage = lastMessage[lastMessage.length - 1]
+    // console.log(props)
+    let countOfMessage = props.chats.length
+    let lastMessage = props.chats[countOfMessage - 1]
     if (lastMessage.text.length > 15) {
-        lastMessage.text = lastMessage.text.substr(0, 15) + "...."
+         lastMessage.text = lastMessage.text.substr(0, 15) + "...."
     }
-    //console.log(lastMessage)
+
     return (
         <>
-           <NavLink to={"Chats/"+props.friend.id}>
+           <NavLink to={"/Chats/"+props.id}>
                 <ListItem alignItems="flex-start">
                     <ListItemAvatar>
-                        <Avatar alt={props.friend.author} src={"../../userpic/" + props.friend.ava}/>
+                        <Avatar alt={props.author} src={"../../userpic/" + props.ava}/>
                     </ListItemAvatar>
                     <ListItemText
-                        primary={props.friend.author}
+                        primary={props.author}
                         secondary={
                             <React.Fragment>
                                 {lastMessage.text}

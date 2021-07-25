@@ -2,12 +2,15 @@ import s from './Message.module.css';
 import {useRef} from "react";
 
 const Message = (props) => {
-    let itemMessage = useRef();
+    //let itemMessage = useRef();
     // console.log(props)
-    if(props===undefined){props.messages.ai=true}
+    if(props===undefined){props.messages.im=true}
+
+    // console.log(props.getAuthorById(100))
+
     return (
-        <div onClick={props.removeItem} id = {props.messages.id} className={props.messages.ai ? s.messageAI : s.message}>
-            {props.messages.author} : {props.messages.text}
+        <div onClick={props.removeItem} id = {props.messages.id} className={props.messages.im ? s.messageAI : s.message}>
+            {props.getAuthorById(props.messages.author)} : {props.messages.text}
         </div>
     );
 

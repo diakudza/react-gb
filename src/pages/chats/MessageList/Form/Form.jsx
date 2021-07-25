@@ -4,14 +4,16 @@ import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField';
 
 const Form = (props) => {
+    //console.log(props)
     let textValue = React.useRef();
+
     let setMessage = (event) => {
         let text = textValue.current.value;
-        if (text==''){
+        if (text === ''){
             alert('Поле пустое!')
             event.preventDefault();
         }else {
-            props.setMessage(text);
+            props.setMessageAdd(text, props.id);
             event.preventDefault();
             textValue.current.value = '';
         }

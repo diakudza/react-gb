@@ -6,74 +6,90 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/home/Home";
 import Profile from "./pages/profile/Profile";
 import {ShowChat} from "./pages/chats/ShowChat";
-import Chats from "./pages/chats/Chats";
 
 let App = () => {
-
-    const [chats, setChats] = useState(
+    let temp=[{}];
+    const [state, setChats] = useState(
         {
-            chats: {
-                100: [
-                    {id: 1, author: 100, text: "Привет", im: true},
-                ],
-                101: [
-                    {id: 2, author: 101, text: "Хай , мэн", im: false},
+            100: {author: "mixa", ava: '1.png', chats: [{id: 1, author: 100, text: "Привет", im: true},]},
+            101: {
+                author: "toxa", ava: '2.png', chats: [{id: 2, author: 101, text: "Хай , мэн", im: false},
                     {id: 2, author: 100, text: "Хай", im: true},
                     {id: 3, author: 100, text: "Как сам?", im: true},
-                    {id: 4, author: 101, text: "Иди ты", im: false},
-                ],
-                102: [
-                    {id: 6, author: 102, text: "Аллоха!", im: false},
-                ],
-                103: [
-                    {id: 9, author: 103, text: "Купи моркови!", im: false},
-                    {id: 11, author: 100, text: "Ленка зажгла!", im: true},
-                    {id: 7, author: 103, text: "Привки!", im: false},
-                ],
-                104: [
-                    {id: 10, author: 104, text: "Видел тачку?!", im: false},
-                    {id: 12, author: 100, text: "Аллоха!", im: true},
-                    {id: 8, author: 104, text: "Жить хорошо!", im: false}
-                ],
-                105: [{id: 13, author: 105, text: "Надо увидиться , есть тема !!", im: false}],
-                106: [{id: 14, author: 106, text: "Аллоха!", im: false},],
-                107: [{id: 15, author: 107, text: "Аллоха!", im: false},],
-                108: [],
-                109: [],
-                110: [{id: 5, author: 110, text: "Смерть кожаными мешкам", im: true},]
+                    {id: 4, author: 101, text: "Иди ты", im: false},]
             },
+            102: {author: "lexa", ava: '3.png', chats: [{id: 6, author: 102, text: "Аллоха!", im: false},]},
+            103: {
+                author: "Anna", ava: '4.png', chats: [{id: 9, author: 103, text: "Купи моркови!", im: false},
+                    {id: 11, author: 100, text: "Ленка зажгла!", im: true},
+                    {id: 7, author: 103, text: "Привки!", im: false},]
+            },
+            104: {
+                author: "Janna", ava: '5.png', chats: [{id: 10, author: 104, text: "Видел тачку?!", im: false},
+                    {id: 12, author: 100, text: "Аллоха!", im: true},
+                    {id: 8, author: 104, text: "Жить хорошо!", im: false}]
+            },
+            105: {
+                author: "Kolia",
+                ava: '2.png',
+                chats: [{id: 13, author: 105, text: "Надо увидиться , есть тема !!", im: false}]
+            },
+            106: {author: "Roman", ava: '5.png', chats: [{id: 14, author: 106, text: "Аллоха!", im: false},]},
+            107: {author: "Kesha", ava: '3.png', chats: [{id: 15, author: 107, text: "Аллоха!", im: false}]},
+            110: {
+                author: "Robot",
+                ava: '1.png',
+                chats: [{id: 5, author: 110, text: "Смерть кожаными мешкам", im: false},]
+            }
+            ,
 
-            friends: [
-                {id: 110, author: "Robot", ava: ''},
-                {id: 100, author: "mixa", ava: '1.png'},
-                {id: 101, author: "toxa", ava: '2.png'},
-                {id: 102, author: "lexa", ava: '3.png'},
-                {id: 103, author: "Anna", ava: '4.png'},
-                {id: 104, author: "Janna", ava: '5.png'},
-                {id: 105, author: "Kolia", ava: '2.png'},
-                {id: 106, author: "Roman", ava: '5.png'},
-                {id: 107, author: "Kesha", ava: '3.png'},
-            ],
-            currentChat: [{author: "ROBOT", text: "Привет, Миха", ai: true}]
+
         });
 
-    let setMessageAdd = (message) => {
-        //debugger
-        setChats([...chats.currentChat, {author: "mixa", text: message, ai: false}])
+    let getAuthorById =(findId)=>{
+        let author = Object.entries(state).filter(id => id[0] == findId)
+        return author[0][1].author
+    }
+
+    let setMessageAdd = (message, id) => {
+        temp.push( {id:1111, author: 100, text: message, im: true})
+        state[id].chats.push( {id:1111, author: 100, text: message, im: true})
+        console.log(temp)
+        setChats(state)
+        console.log(state)
+
     }
 
     const removeItem = (n) => {
-        // debugger
+        debugger
         let findItem = n.currentTarget.attributes[0].value
-        let itemChat = chats.chats.find((el, index) => el.id == findItem) //нахожу обьект, но не могу получить его индеккс, что бы потмо его удалить
-
+        //let itemChat = chats.chats.find((el, index) => el.id == findItem) //нахожу обьект, но не могу получить его индеккс, что бы потмо его удалить
         //chats.chats.splice(1.)
         //setChats(chats)
         //console.log(chats.chats.findIndex(itemChat))
 
     }
+    useEffect(() => {
+        // if (messages[messages.length - 1].author !== 'ROBOT') {
+        //     let lastMessage = messages[messages.length - 1].text
+        //     sendMessageFromRobot(`Я не пойму "${lastMessage}" ,что ты имеешь в виду?`)
+        // }
+        console.log('effect где?')
+        //sendMessageFromRobot(`Я не пойму ,что ты имеешь в виду?`,100)
+    }, [state]) //[state],[temp],[]
 
-
+    // let sendMessageFromRobot = (message, id, delay = 1000) => {
+    //    if(temp.length!==0){
+    //        // setTimeout(() => {
+    //         console.log(temp)
+    //         state[temp[0].id].chats.push( {id:1111, author: 100, text: message, im: false})
+    //         console.log(state[temp[0].id].chats)
+    //         temp = []
+    //         setChats(state)
+    //
+    //     // }, (Math.random() * 2) * 1000)
+    // }
+    // }
     return (
 
         <Router>
@@ -81,9 +97,9 @@ let App = () => {
                 <Navbar/>
                 <Route exact path="/" component={Home}/>
                 <Route exact path="/Profile" component={Profile}/>
-                <Route exact path="/Chats" render={() => <Chats chats={chats}/>}/>
+                <Route exact path="/Chats" render={() => <ShowChat chats={state} setMessageAdd={setMessageAdd} getAuthorById={getAuthorById}/>}/>
                 <Route path="/Chats/:id"
-                       render={() => <ShowChat chats={chats} removeItem={removeItem} setMessageAdd={setMessageAdd}/>}/>
+                       render={() => <ShowChat chats={state} removeItem={removeItem} setMessageAdd={setMessageAdd} getAuthorById={getAuthorById}/>}/>
             </div>
 
         </Router>

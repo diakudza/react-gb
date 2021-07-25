@@ -4,31 +4,33 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import ContactList from "./ContactList/ContactList";
-import MessageList from "./MessageList/MessageList";
-
+import "../../App.css"
+import Form from "./MessageList/Form/Form";
 export const ShowChat = (props) => {
     let {id} = useParams();
     if(id===undefined){ id = 110}
-    console.log(props)
-    //let AllMessage = props.chats.chats[id].map(mes => mes.text ==  id)
-    //console.log(AllMessage)
-    let ArrayAllMessage = props.chats.chats[id].map((mes) => <Message messages={mes} removeItem={props.removeItem}/> )
-    let author = props.chats.friends.find(mes => mes.id ==  id)
+    let ArrayAllMessage = props.chats[id].chats.map((mes) => <Message messages={mes} id={id} getAuthorById={props.getAuthorById} removeItem={props.removeItem}/> )
 
+    console.log(props)
     return (
 
-        <div className="padding020">
+        <div className="padding20">
 
             <Grid container spacing={2}>
                 <Grid item xs={2}>{/*Список контактов*/}
                     <Paper elevation={3}>
-                        <ContactList state={props.chats}/>
+                        <ContactList state={props.chats} id={id}/>
                     </Paper>
                 </Grid>
-                <Grid item xs={10} className="flexCol">
-                    <h2>Chat: {author.author}</h2>
-                   {/*<MessageList messages={props.chats} setMessageAdd={props.setMessageAdd} className="flexCol messageList"/>*/}
+                <Grid item xs={10} className="flexCol" >
+
+
+                    <div className="flexCol messageHeight" >
+                        <h2>Chat: {props.chats[id].author}</h2>
+
                     {ArrayAllMessage}
+                    </div>
+                    <Form setMessageAdd={props.setMessageAdd} id={id}/>
                 </Grid>
             </Grid>
 

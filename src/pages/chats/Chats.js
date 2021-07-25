@@ -21,13 +21,14 @@ let Chats = (props) => {
             sendMessageFromRobot(`Я не пойму "${lastMessage}" ,что ты имеешь в виду?`)
         }
     }, [messages])
+
     return (
         <div className="padding020">
             <h2>Сообщения</h2>
             <Grid container spacing={2}>
                 <Grid item xs={2}>{/*Список контактов*/}
                     <Paper elevation={3}>
-                        <ContactList state={props.chats}/>
+                        {/*<ContactList state={props.chats}/>*/}
                     </Paper>
                 </Grid>
                 <Grid item xs={10} className="flexCol">
