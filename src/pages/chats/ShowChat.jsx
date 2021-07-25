@@ -9,7 +9,7 @@ import Form from "./MessageList/Form/Form";
 export const ShowChat = (props) => {
     let {id} = useParams();
     if(id===undefined){ id = 110}
-    let ArrayAllMessage = props.chats[id].chats.map((mes) => <Message messages={mes} id={id} getAuthorById={props.getAuthorById} removeItem={props.removeItem}/> )
+    let ArrayAllMessage = props.chats[id].chats.map((mes,index) => <Message key={index} messages={mes} id={id} getAuthorById={props.getAuthorById} removeItem={props.removeItem}/> )
 
     console.log(props)
     return (
@@ -30,7 +30,7 @@ export const ShowChat = (props) => {
 
                     {ArrayAllMessage}
                     </div>
-                    <Form setMessageAdd={props.setMessageAdd} id={id}/>
+                    <Form setMessageAdd={props.setMessageAdd} render={props.render}id={id}/>
                 </Grid>
             </Grid>
 

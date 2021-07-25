@@ -16,6 +16,7 @@ const Form = (props) => {
             props.setMessageAdd(text, props.id);
             event.preventDefault();
             textValue.current.value = '';
+            props.render()
         }
     }
     useEffect(()=>{
