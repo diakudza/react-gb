@@ -13,10 +13,9 @@ const Form = (props) => {
             alert('Поле пустое!')
             event.preventDefault();
         }else {
-            props.setMessageAdd(text, props.id);
+            props.setMessageAdd(text, props.id, props.author);
             event.preventDefault();
             textValue.current.value = '';
-            props.render()
         }
     }
     useEffect(()=>{

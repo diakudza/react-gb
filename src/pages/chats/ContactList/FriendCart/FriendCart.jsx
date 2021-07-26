@@ -6,18 +6,17 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import {NavLink} from "react-router-dom";
 
-
 const FriendCart = (props) => {
-    // console.log(props)
-    let countOfMessage = props.chats.length
-    let lastMessage = props.chats[countOfMessage - 1]
-    if (lastMessage.text.length > 15) {
-         lastMessage.text = lastMessage.text.substr(0, 15) + "...."
+    //console.log(props)
+    let lastMessage = props.messsage
+
+    const cleanChat = () =>{
+        props.startChat()
     }
 
     return (
         <>
-           <NavLink to={"/Chats/"+props.id}>
+           <NavLink to={"/Chats/"+props.id} onClick={cleanChat}>
                 <ListItem alignItems="flex-start">
                     <ListItemAvatar>
                         <Avatar alt={props.author} src={"../../userpic/" + props.ava}/>
@@ -26,17 +25,15 @@ const FriendCart = (props) => {
                         primary={props.author}
                         secondary={
                             <React.Fragment>
-                                {lastMessage.text}
+                                {lastMessage}
                             </React.Fragment>
                         }
                     />
-                    {countOfMessage}
                 </ListItem>
             </NavLink>
             <Divider variant="inset" component="li"/>
         </>
     );
-
 }
 
 export default FriendCart;
