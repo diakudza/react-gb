@@ -1,11 +1,14 @@
 import './App.css';
 import React, {useEffect, useState} from "react";
+import {Provider, useSelector} from "react-redux"
 import {BrowserRouter as Router, Route, useParams} from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/home/Home";
 import Profile from "./pages/profile/Profile";
 import {ShowChat} from "./pages/chats/ShowChat";
 import {v4 as uuidv4} from 'uuid';
+import {store} from "./store"
+
 
 let App = () => {
 
@@ -48,7 +51,7 @@ let App = () => {
         }
     }
     return (
-
+<Provider store={store}>
         <Router>
             <div className="App">
                 <Navbar/>
@@ -64,7 +67,7 @@ let App = () => {
             </div>
 
         </Router>
-
+</Provider>
     );
 };
 
