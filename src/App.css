@@ -1,4 +1,4 @@
-.App {
+.app {
   height: 900px;
 }
 
@@ -13,10 +13,11 @@ a {
   align-self: flex-end;
 }
 .messageList {
-  height: 1vh;
+  height: 100%;
 }
 .messageHeight {
   height: 94%;
+  overflow-y: hidden;
 }
 .padding020 {
   padding: 0 30px;

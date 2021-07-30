@@ -105,8 +105,8 @@ let App = (props) => {
                 <Navbar/>
                 <Route exact path="/" component={Home}/>
                 <Route exact path="/Profile" component={Profile}/>
-                <Route exact path="/Chats" render={() => <ShowChat chats={state} setMessageAdd={setMessageAdd} getAuthorById={getAuthorById} render={props.render}/>}/>
-                <Route path="/Chats/:id"
+                <Route exact path="/ChatFeed" render={() => <ShowChat chats={state} setMessageAdd={setMessageAdd} getAuthorById={getAuthorById} render={props.render}/>}/>
+                <Route path="/ChatFeed/:id"
                        render={() => <ShowChat chats={state} removeItem={removeItem} setMessageAdd={setMessageAdd} getAuthorById={getAuthorById} render={props.render}/>}/>
             </div>
 
