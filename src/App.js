@@ -1,40 +1,76 @@
 import './App.css';
-import Message from "./components/Message/Message";
-import {useState, useEffect} from "react";
-import Form from "./components/Form/Form";
-import React from "react";
+import React, {useEffect, useState} from "react";
+import {BrowserRouter as Router, Route, useParams} from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./pages/home/Home";
+import Profile from "./pages/profile/Profile";
+import {ShowChat} from "./pages/chats/ShowChat";
+import {v4 as uuidv4} from 'uuid';
 
 let App = () => {
 
-    const [messages, setMessages] = useState([{author: "ROBOT", text: "Привет, Миха", ai: true}]);
+    const friend = {
+        // 100: {author: "mixa", ava: '1.png'},
+        101: {author: "toxa", ava: '2.png'},
+        102: {author: "lexa", ava: '3.png'},
+        103: {author: "Anna", ava: '4.png'},
+        104: {author: "Janna", ava: '5.png'},
+        105: {author: "Kolia", ava: '2.png'},
+        106: {author: "Roman", ava: '5.png'},
+        107: {author: "Kesha", ava: '3.png'},
+        110: {author: "Robot", ava: '1.png'},
+    };
 
-    let messagesArr = messages.map((el, index) => <Message key={index} state={el}/>)
+    const [chats, setChats] = useState([]);
 
-    let setMessage = (message) => {
-        setMessages([...messages, {author: "mixa", text: message, ai: false}])
+    let setMessageAdd = (message, fromId, fromAuthor) => {
+        //debugger
+        setChats([...chats, {id: uuidv4(), author: "mixa", text: message, im: false, fromAuthor: fromAuthor}])
     }
 
-    let sendMessageFromRobot = (message, delay=1000) => {
-        setTimeout(() => {
-            setMessages([...messages, {author: "ROBOT", text: message, ai: true}])
-        }, (Math.random() * 2) * 1000)
+    const removeChatItem = (id) => {
+        let filterredArray = chats.filter(el => el.id !== id)
+        setChats(filterredArray)
     }
+
+    const startChat = () => setChats([])
 
     useEffect(() => {
-        if (messages[messages.length - 1].author !== 'ROBOT') {
-            let lastMessage = messages[messages.length - 1].text
-            sendMessageFromRobot(`Я не пойму "${lastMessage}" ,что ты имеешь в виду?`)
+        sendMessageFromRobot(`Я не пойму ,что ты имеешь в виду?`, 100,)
+    }, [chats])
+
+    let sendMessageFromRobot = (message, delay = 1000) => {
+        if (chats.length !== 0 && chats[chats.length - 1].author == 'mixa') {
+            setTimeout(() => {
+                setChats([...chats, {
+                    id: uuidv4(),
+                    author: chats[chats.length - 1].fromAuthor,
+                    text: message,
+                    im: true
+                }])
+            }, (Math.random() * 2) * delay)
         }
-    }, [messages])
-
-
+    }
     return (
 
-        <div className="App">
-            {messagesArr}
-            <Form setmessage={setMessage}/>
-        </div>
+        <Router>
+            <div className="app">
+                <Navbar/>
+                <Route exact path="/" component={Home}/>
+                <Route exact path="/Profile" component={Profile}/>
+                <Route path="/Chat"
+                       render={() => <ShowChat style={{height: 'auto'}}
+                                               friend={friend}
+                                               state={chats}
+                                               startChat={startChat}
+                                               setMessageAdd={setMessageAdd}
+                                               removeChatItem={removeChatItem}
+                       />}/>
+            </div>
+
+        </Router>
+
     );
-}
+};
 
 export default App;

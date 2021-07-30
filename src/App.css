@@ -1,21 +1,33 @@
-.App {
+.app {
+  height: 900px;
+}
 
-
-  padding: 40px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+a {
+  text-decoration: none;
+  color: black;
 }
 
 .form {
   width: 100%;
-  background: blanchedalmond;
+   height: 6%;
+  align-self: flex-end;
 }
 .messageList {
-  height: 1vh;
+  height: 100%;
+}
+.messageHeight {
+  height: 94%;
+  overflow-y: hidden;
+}
+.padding020 {
+  padding: 0 30px;
 }
 
+.navbar {
+  padding: 11px 0 0 23px;
+  height: 30px;
+  background-color: #f3e6faf5;
+}
 
 .flexRow {
   display: flex;
