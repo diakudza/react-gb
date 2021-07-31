@@ -16,7 +16,7 @@ const FriendCart = (props) => {
 
     return (
         <>
-           <NavLink to={"/Chats/"+props.id} onClick={cleanChat}>
+           <NavLink to={"/Chat/"+props.id} onClick={cleanChat}>
                 <ListItem alignItems="flex-start">
                     <ListItemAvatar>
                         <Avatar alt={props.author} src={"../../userpic/" + props.ava}/>

@@ -11,7 +11,7 @@ const Navbar = (props) => {
             <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
                 <NavLink to="/" ><Button>НОМЕ</Button>      </NavLink>
                 <NavLink to="/Profile" ><Button>PROFILE</Button>      </NavLink>
-                <NavLink to="/Chats" ><Button>CHATS</Button>      </NavLink>
+                <NavLink to="/Chat" ><Button>CHATS</Button>      </NavLink>
             </ButtonGroup>
         </div>
     );

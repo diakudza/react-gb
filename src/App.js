@@ -1,7 +1,7 @@
 import './App.css';
 import React, {useEffect, useState} from "react";
 import {Provider, useSelector} from "react-redux"
-import {BrowserRouter as Router, Route, useParams} from "react-router-dom";
+import {BrowserRouter as Router, Route} from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/home/Home";
 import Profile from "./pages/profile/Profile";
@@ -13,7 +13,7 @@ import {store} from "./store"
 let App = () => {
 
     const friend = {
-        100: {author: "mixa", ava: '1.png'},
+        //100: {author: "mixa", ava: '1.png'},
         101: {author: "toxa", ava: '2.png'},
         102: {author: "lexa", ava: '3.png'},
         103: {author: "Anna", ava: '4.png'},
@@ -30,11 +30,8 @@ let App = () => {
            setChats([...chats, {id: uuidv4(), author: "mixa", text: message, im: false, fromAuthor: fromAuthor}])
     }
 
-    const removeItem = (id) => {
-        //debugger
-        let findItem = id.currentTarget.attributes[0].value
-        let filterredArray = chats.filter(el => el.id !== findItem)
-        console.log(filterredArray)
+    const removeChatMessage = (id) => {
+        let filterredArray = chats.filter(el => el.id !== id)
         setChats(filterredArray)
     }
 
@@ -52,21 +49,22 @@ let App = () => {
     }
     return (
 <Provider store={store}>
-        <Router>
-            <div className="App">
-                <Navbar/>
-                <Route exact path="/" component={Home}/>
-                <Route exact path="/Profile" component={Profile}/>
-                <Route exact path="/Chats"
-                       render={() => <ShowChat friend={friend} state={chats} startChat={startChat} setMessageAdd={setMessageAdd}
-                       />}/>
-                <Route path="/Chats/:id"
-                       render={() => <ShowChat friend={friend} state={chats} startChat={startChat} removeItem={removeItem}
-                                               setMessageAdd={setMessageAdd}
-                       />}/>
-            </div>
+    <Router>
+        <div className="app">
+            <Navbar/>
+            <Route exact path="/" component={Home}/>
+            <Route exact path="/Profile" component={Profile}/>
+            <Route path="/Chat"
+                   render={() => <ShowChat style={{height: 'auto'}}
+                                           friend={friend}
+                                           state={chats}
+                                           startChat={startChat}
+                                           setMessageAdd={setMessageAdd}
+                                           removeChatMessage={removeChatMessage}
+                   />}/>
+        </div>
 
-        </Router>
+    </Router>
 </Provider>
     );
 };
