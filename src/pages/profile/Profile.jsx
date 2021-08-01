@@ -1,15 +1,13 @@
 import React from "react";
-import {useSelector, useDispatch} from "react-redux"
-import {createCheckBoxToggle, showCheckBoxStatus} from "../../store/profile";
+import {profileConnect} from "../../connects/profileConnect"
 
-
-const Profile = () => {
-    const checked = useSelector((store) => store.checked)
-    const dispatch = useDispatch()
-    console.log(checked)
-    const showStatus = () => {
-        dispatch(showCheckBoxStatus())
-    }
+export const ProfileRender = ({status,change}) => {
+    // const checked = useSelector((store) => store.checked)
+    // const dispatch = useDispatch()
+    console.log(status)
+    // const showStatus = () => {
+    //     dispatch(showCheckBoxStatus())
+    // }
 
     return (
         <div className='padding020'>
@@ -18,15 +16,16 @@ const Profile = () => {
 
             <input
                 type="checkbox"
-                checked={checked}
-                value={checked}
-                onChange={() => dispatch(createCheckBoxToggle())}
+                checked={status}
+                value={status}
+                onChange={() => change()}
             />
-            {checked && <div>CHECKED!!!</div>}
+            {status && <div>CHECKED!!!</div>}
 
 
         </div>
     );
 };
 
-export default Profile;
+export const Profile = profileConnect(ProfileRender);
+

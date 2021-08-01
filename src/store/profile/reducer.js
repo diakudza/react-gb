@@ -2,7 +2,6 @@ import {CHECKBOX_TOGGLE, SHOW_CHECKBOX_STATUS} from "./action";
 
 const profileInitialState = {
     checked: false,
-    status: 'checked'
 }
 
 export const profileReducer = (state = profileInitialState, action) => {
@@ -11,8 +10,7 @@ export const profileReducer = (state = profileInitialState, action) => {
 
         case CHECKBOX_TOGGLE:
             //debugger
-
-            return {
+             return {
                 ...state,
                 checked: !state.checked
             }
@@ -22,7 +20,6 @@ export const profileReducer = (state = profileInitialState, action) => {
             return state.checked
 
         default:
-            // debugger
-            return state
+           return state
     }
 }

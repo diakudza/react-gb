@@ -8,15 +8,10 @@ import {NavLink} from "react-router-dom";
 
 const FriendCart = (props) => {
     //console.log(props)
-    let lastMessage = props.messsage
-
-    const cleanChat = () =>{
-        props.startChat()
-    }
-
+    //let lastMessage = props.message
     return (
         <>
-           <NavLink to={"/Chat/"+props.id} onClick={cleanChat}>
+           <NavLink to={"/Chat/"+props.id} >
                 <ListItem alignItems="flex-start">
                     <ListItemAvatar>
                         <Avatar alt={props.author} src={"../../userpic/" + props.ava}/>
@@ -25,7 +20,7 @@ const FriendCart = (props) => {
                         primary={props.author}
                         secondary={
                             <React.Fragment>
-                                {lastMessage}
+                                {/*{lastMessage}*/}
                             </React.Fragment>
                         }
                     />
