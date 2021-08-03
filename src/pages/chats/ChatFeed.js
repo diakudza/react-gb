@@ -34,11 +34,12 @@ const ChatFeedRender = ({sendMessage, removeMessage, getDialog, getMessage, getD
         if (id === 100) {
             return 'Я'
         }
-        debugger
+
         let arrayOfmessageForUser = Object.entries(getDialog).filter((contact) => contact[0] == id)
-        debugger
+
         return arrayOfmessageForUser[0][1].author
     }
+
 
 
     // let sendMessageFromRobot = (message, delay = 1000) => {

@@ -34,13 +34,8 @@ export const messagesReducer = (state = messagesInitialState, action) => {
 
         case
         REMOVE_MESSAGES:
-            debugger
-            //let messageForRemove = getMessage.filter(el => el.id !== idmessage)
             let dialogWhitCurrentContact = Object.entries(state).filter(chat => chat[0] == action.payload)
-            console.log(dialogWhitCurrentContact[0][1])
             let messageForRemove = dialogWhitCurrentContact[0][1].filter(message => message.messageId !== action.messageId)
-            console.log(messageForRemove)
-            debugger
             return {
                 ...state,
                 [action.payload]: messageForRemove
