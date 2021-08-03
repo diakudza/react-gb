@@ -6,7 +6,7 @@ import Form from "./MessageList/Form/Form";
 import {v4 as uuidv4} from "uuid";
 import {messagesConnect} from "../../connects/messagesConnect";
 
-const ChatFeedRender = ({sendMessage, removeMessage, getDialog, getMessage, getDialogById}) => {
+const ChatFeedRender = ({sendMessage, removeMessage, dialogState, messageState, getDialogById}) => {
 
     let {id} = useParams();
     if (id === undefined) {
@@ -14,16 +14,16 @@ const ChatFeedRender = ({sendMessage, removeMessage, getDialog, getMessage, getD
     }
 
     let setMessageAdd = (message) => {
-        sendMessage({chatID:id, messageId: uuidv4(), author: 100, text: message})
+        sendMessage({chatID: id, messageId: uuidv4(), author: 100, text: message})
     }
 
-    let removeChatMessage = (chatId,messageId) => {
-         removeMessage(chatId,messageId)
+    let removeChatMessage = (chatId, messageId) => {
+        removeMessage(chatId, messageId)
     }
 
     let messegeForCurrentContact = (id) => {
         //debugger
-        let arrayOfmessageForUser = Object.entries(getMessage).filter((contact) => contact[0] == id)
+        let arrayOfmessageForUser = Object.entries(messageState).filter((contact) => contact[0] == id)
         return arrayOfmessageForUser[0][1]
     }
 
@@ -35,20 +35,11 @@ const ChatFeedRender = ({sendMessage, removeMessage, getDialog, getMessage, getD
             return 'Я'
         }
 
-        let arrayOfmessageForUser = Object.entries(getDialog).filter((contact) => contact[0] == id)
+        let arrayOfmessageForUser = Object.entries(dialogState).filter((contact) => contact[0] == id)
 
         return arrayOfmessageForUser[0][1].author
     }
 
-
-
-    // let sendMessageFromRobot = (message, delay = 1000) => {
-    //     if (chats.length !== 0 && chats[chats.length - 1].author == 'mixa' ) {
-    //         setTimeout(() => {
-    //             setChats([...chats, {id: uuidv4(), author: chats[chats.length -1].fromAuthor, text: message, im: true}])
-    //         }, (Math.random() * 2) * delay)
-    //     }
-    // }
 
     let MessList = messegeForCurrentContact(id).map((mes, index) => <Message key={index}
                                                                              messages={mes.text}
@@ -61,13 +52,13 @@ const ChatFeedRender = ({sendMessage, removeMessage, getDialog, getMessage, getD
     return (
         <div className="messageList">
             <div className="flexCol messageHeight">
-                <h2>Chat: {getDialog[id].author}</h2>
+                <h2>Chat: {dialogState[id].author}</h2>
                 {MessList}
             </div>
             <Form setMessageAdd={setMessageAdd}
                   id={id}
-                  author={getDialog[id].author}/>
-            </div>
+                  author={dialogState[id].author}/>
+        </div>
     )
 };
 

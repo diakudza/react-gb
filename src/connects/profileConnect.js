@@ -1,9 +1,9 @@
 import {connect} from 'react-redux';
-import {checkBoxToggle, getStatus} from "../store/profile";
+import {checkBoxToggle, status} from "../store/profile";
 
 const mapStateToProps = (state) => {
     return {
-        status: getStatus(state),
+        status: status(state),
     }
 }
 

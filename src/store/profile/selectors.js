@@ -1,1 +1,1 @@
-export const getStatus = (state) => state.profile.checked ;
+export const status = (state) => state.profile.checked ;

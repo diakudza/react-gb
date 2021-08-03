@@ -1,7 +1,7 @@
-import {createStore, combineReducers,applyMiddleware, compose} from "redux";
-import { persistStore, persistReducer } from 'redux-persist'
+import {createStore, combineReducers, applyMiddleware, compose} from "redux";
+import {persistStore, persistReducer} from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import { PersistGate } from 'redux-persist/integration/react'
+import {PersistGate} from 'redux-persist/integration/react'
 import {profileReducer} from "./profile"
 import {contactsReducer} from "./Contacts";
 import {messagesReducer, SEND_MESSAGE, sendMessage} from "./Messages";
@@ -20,23 +20,29 @@ const rootReducer = combineReducers({
 })
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
-const addAnswerAutoMessege = (store) => (dispatch) => (action)=>{
+const addAnswerAutoMessege = (store) => (dispatch) => (action) => {
 
-    if (action.type == SEND_MESSAGE){
-        //console.log(store, action)
-        setTimeout(()=> dispatch(sendMessage({chatID:action.payload.chatID, messageId: uuidv4(), author: action.payload.chatID, text: 'Я тебя не понимаю)'})), 1000 )
+    if (action.type == SEND_MESSAGE) {
+        console.log(store, action)
+        if (action.payload.author == 100) {
+            setTimeout(() => dispatch(sendMessage({
+                chatID: action.payload.chatID,
+                messageId: uuidv4(),
+                author: action.payload.chatID,
+                text: 'Я тебя не понимаю)'
+            })), 1000)
+        }
     }
 
-
-return dispatch(action)
+    return dispatch(action)
 }
 
 //export const persistore = persistStore(store)
 
 const composer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-export const store = createStore(persistReducer(persistConfig, rootReducer),  composer(applyMiddleware(addAnswerAutoMessege,thunk))
- );
+export const store = createStore(persistReducer(persistConfig, rootReducer), composer(applyMiddleware(addAnswerAutoMessege, thunk))
+);
 
 //,
 // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
