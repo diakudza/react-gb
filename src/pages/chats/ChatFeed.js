@@ -4,23 +4,43 @@ import React from "react";
 import "../../App.css"
 import Form from "./MessageList/Form/Form";
 import {v4 as uuidv4} from "uuid";
+import {messagesConnect} from "../../connects/messagesConnect";
 
-export const ChatFeed = () => {
+const ChatFeedRender = ({sendMessage, removeMessage, getDialog, getMessage, getDialogById}) => {
 
-    // let setMessageAdd = (message,fromId, fromAuthor) => {
-    //     setChats([...chats, {id: uuidv4(), author: "mixa", text: message, im: false, fromAuthor: fromAuthor}])
-    // }
-    //
-    // const removeChatMessage = (id) => {
-    //     let filterredArray = chats.filter(el => el.id !== id)
-    //     setChats(filterredArray)
-    // }
-    //
-    // const startChat = () => setChats([])
-    //
-    // useEffect(() => {
-    //     sendMessageFromRobot(`Я не пойму ,что ты имеешь в виду?`, 100,)}, [chats])
-    //
+    let {id} = useParams();
+    if (id === undefined) {
+        id = 110
+    }
+
+    let setMessageAdd = (message) => {
+        sendMessage({chatID:id, messageId: uuidv4(), author: 100, text: message})
+    }
+
+    let removeChatMessage = (chatId,messageId) => {
+         removeMessage(chatId,messageId)
+    }
+
+    let messegeForCurrentContact = (id) => {
+        //debugger
+        let arrayOfmessageForUser = Object.entries(getMessage).filter((contact) => contact[0] == id)
+        return arrayOfmessageForUser[0][1]
+    }
+
+    const findContactById = (id) => {
+        if (id === undefined) {
+            id = 110
+        }
+        if (id === 100) {
+            return 'Я'
+        }
+        debugger
+        let arrayOfmessageForUser = Object.entries(getDialog).filter((contact) => contact[0] == id)
+        debugger
+        return arrayOfmessageForUser[0][1].author
+    }
+
+
     // let sendMessageFromRobot = (message, delay = 1000) => {
     //     if (chats.length !== 0 && chats[chats.length - 1].author == 'mixa' ) {
     //         setTimeout(() => {
@@ -28,29 +48,26 @@ export const ChatFeed = () => {
     //         }, (Math.random() * 2) * delay)
     //     }
     // }
-    debugger
-    console.log('111')
-    // let {id} = useParams();
-    // if (id === undefined) {
-    //     id = 110
-    // }
-    // let MessList = props.state.map((mes, index) => <Message key={index}
-    //                                                         messages={mes.text}
-    //                                                         author={mes.author}
-    //                                                         id={mes.id}
-    //                                                         im={mes.im}
-    //                                                         removeChatMessage={props.removeChatMessage}/>).reverse()
+
+    let MessList = messegeForCurrentContact(id).map((mes, index) => <Message key={index}
+                                                                             messages={mes.text}
+                                                                             author={mes.author}
+                                                                             id={mes.messageId}
+                                                                             chatid={id}
+                                                                             findContactById={findContactById}
+                                                                             removeChatMessage={removeChatMessage}/>).reverse()
 
     return (
         <div className="messageList">
-            asdsadad
             <div className="flexCol messageHeight">
-                {/*<h2>Chat: {props.friend[id].author}</h2>*/}
-                   {/*{props.state[1] && MessList}*/}
+                <h2>Chat: {getDialog[id].author}</h2>
+                {MessList}
             </div>
-            {/*<Form setMessageAdd={props.setMessageAdd}*/}
-            {/*      id={id}*/}
-            {/*      author={props.friend[id].author}/>*/}
-        </div>
+            <Form setMessageAdd={setMessageAdd}
+                  id={id}
+                  author={getDialog[id].author}/>
+            </div>
     )
 };
+
+export const ChatFeed = messagesConnect(ChatFeedRender)

@@ -1,21 +1,16 @@
-import {SEND_MESSAGE, GET_ALL_MESSAGES, REMOVE_MESSAGES} from "./action";
+import {SEND_MESSAGE, GET_ALL_MESSAGES, REMOVE_MESSAGES, GET_DIALOG_BY_ID} from "./action";
 
 const messagesInitialState = {
 
-    101: [{messageId: 112, author: 101, text: 'Хелло'},
-        {messageId: 113, author: 100, text: 'Как сам?'},
+    101: [{messageId: 112, author: 101, text: 'Хелло'}, {messageId: 113, author: 100, text: 'Как сам?'},
         {messageId: 114, author: 101, text: 'Огонь'}],
-
-    102: [{messageId:111, author: 102, text: 'Ку'}],
-
-    103: [{messageId:111, author: 103, text: 'Ку'}],
-
-    104: [{messageId:111, author: 104, text: 'Хай'},{messageId:112, author: 100, text: 'Привет)'}],
-
-    105: [{messageId:111, author: 105, text: 'Ку'}],
-    106: [{messageId:111, author: 106, text: 'Здарова, Мижго'}],
-    107: [{messageId:111, author: 107, text: 'Ку'}],
-    110: [{messageId:111, author: 110, text: 'Как делы?'}],
+    102: [{messageId: 111, author: 102, text: 'Ку'}],
+    103: [{messageId: 111, author: 103, text: 'Ку'}],
+    104: [{messageId: 111, author: 104, text: 'Хай'}, {messageId: 112, author: 100, text: 'Привет)'}],
+    105: [{messageId: 111, author: 105, text: 'Ку'}],
+    106: [{messageId: 111, author: 106, text: 'Здарова, Мижго'}],
+    107: [{messageId: 111, author: 107, text: 'Ку'}],
+    110: [{messageId: 111, author: 110, text: 'Как делы?'}],
 }
 
 export const messagesReducer = (state = messagesInitialState, action) => {
@@ -23,19 +18,47 @@ export const messagesReducer = (state = messagesInitialState, action) => {
     switch (action.type) {
 
         case SEND_MESSAGE:
-            debugger
+            //debugger
+            let index = action.payload.chatID
             return {
-                // ...state,[{messageId: , author: 101, text: 'Хелло'}]
+                ...state,
+                [index]: [
+                    ...state[index], {
+                        messageId: action.payload.messageId,
+                        author: action.payload.author,
+                        text: action.payload.text
+                    }
+                ]
+
             }
 
-        case REMOVE_MESSAGES:
+        case
+        REMOVE_MESSAGES:
             debugger
-            return state
+            //let messageForRemove = getMessage.filter(el => el.id !== idmessage)
+            let dialogWhitCurrentContact = Object.entries(state).filter(chat => chat[0] == action.payload)
+            console.log(dialogWhitCurrentContact[0][1])
+            let messageForRemove = dialogWhitCurrentContact[0][1].filter(message => message.messageId !== action.messageId)
+            console.log(messageForRemove)
+            debugger
+            return {
+                ...state,
+                [action.payload]: messageForRemove
 
-        case GET_ALL_MESSAGES:
+            }
+
+        case
+        GET_ALL_MESSAGES:
+            debugger
+        // let findContact = state.filter((user) => user.id == action.payload)
+        // return {...state, findContact}
+
+        case
+        GET_DIALOG_BY_ID:
             debugger
             let findContact = state.filter((user) => user.id == action.payload)
-            return { ...state, findContact }
+            return {...state, findContact}
+
 
         default:
             return state

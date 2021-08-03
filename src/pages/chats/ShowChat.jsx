@@ -19,6 +19,8 @@ export const ShowChat = () => {
                 <Grid item xs={10} style={{height: 'auto'}}>
 
                    <Route path="/Chat/:id" render={() => <ChatFeed /> }/>
+
+
                 </Grid>
             </Grid>
 

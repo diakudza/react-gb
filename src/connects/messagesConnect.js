@@ -1,18 +1,21 @@
 import {connect} from 'react-redux';
-import {sendMessage, removeMessage, getAllMessages, removeMessage} from "../store/Messages";
+import {sendMessage, removeMessage, getStateSelector, getDialogById,getStateWithMessageSelector} from "../store/Messages";
 
-const mapStateToProps = (userId) => {
+const mapStateToProps = (state) => {
     return {
-        getMessages: getAllMessages(userId),
+        getDialog: getStateSelector(state),
+        getMessage: getStateWithMessageSelector(state)
+
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         sendMessage: (id) => dispatch(sendMessage(id)),
-        removeMessage: (id) => dispatch(removeMessage(id)),
+        removeMessage: (chatid, id) => dispatch(removeMessage(chatid,id)),
+        getDialogById: (id) => {dispatch(getDialogById(id))}
     }
 }
 
 
-export const messageConnect = connect(mapStateToProps,  mapDispatchToProps);
+export const messagesConnect = connect(mapStateToProps,  mapDispatchToProps);

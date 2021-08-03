@@ -24,7 +24,7 @@ export const contactsReducer = (state = contactsInitialState, action) => {
             debugger
             let findContact = Object.entries(state).filter((user) => user[0] == action.payload)
             findContact = findContact[0][1]
-            //console.log(findContact)
+            console.log(findContact)
             return { ...state, findContact}
 
         default:

@@ -1,3 +1,5 @@
-export const getAllContactList = (state) => state.contacts ;
-export const getAllMessageByUserId = (id)=>(state) => Object.entries(state.contacts).find((contact) => contact.id == id) ;
+export const getStateSelector = (state) => state.contacts ;
+export const getStateWithMessageSelector = (state) => state.messages ;
+
+// export const getDialogWithId = (id)=>(state) =>{ console.log(state.messages); Object.key(state.messages).filter((contact) => contact.id == id)} ; - не смог завести
 

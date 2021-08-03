@@ -21,7 +21,7 @@ let App = () => {
             <Navbar/>
             <Route exact path="/" component={Home}/>
             <Route exact path="/Profile" component={Profile}/>
-            <Route exact path="/Chat"
+            <Route path="/Chat"
                    render={() => <ShowChat style={{height: 'auto'}} />}/>
         </div>
 
