@@ -1,4 +1,4 @@
-import {GET_ALL_CONTACTS,GET_CONTACT_BY_ID} from "./action";
+import {GET_ALL_CONTACTS, GET_CONTACT_BY_ID, LAST_MESSAGE} from "./action";
 
 const contactsInitialState = {
 
@@ -17,14 +17,14 @@ export const contactsReducer = (state = contactsInitialState, action) => {
     switch (action.type) {
 
         case GET_ALL_CONTACTS:
-            debugger
+            //debugger
             return state
 
         case GET_CONTACT_BY_ID:
-            debugger
+            //debugger
             let findContact = Object.entries(state).filter((user) => user[0] == action.payload)
             findContact = findContact[0][1]
-            console.log(findContact)
+            //console.log(findContact)
             return { ...state, findContact}
 
         default:

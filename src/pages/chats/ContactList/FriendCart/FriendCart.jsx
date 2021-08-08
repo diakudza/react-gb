@@ -7,9 +7,7 @@ import Avatar from '@material-ui/core/Avatar';
 import {NavLink} from "react-router-dom";
 
 const FriendCart = (props) => {
-    //console.log(props)
-    //let lastMessage = props.message
-    return (
+      return (
         <>
            <NavLink to={"/Chat/"+props.id} >
                 <ListItem alignItems="flex-start">

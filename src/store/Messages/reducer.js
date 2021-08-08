@@ -1,4 +1,4 @@
-import {SEND_MESSAGE, GET_ALL_MESSAGES, REMOVE_MESSAGES, GET_DIALOG_BY_ID} from "./action";
+import {SEND_MESSAGE, GET_ALL_MESSAGES, REMOVE_MESSAGES, GET_DIALOG_BY_ID, LAST_MESSAGE} from "./action";
 
 const messagesInitialState = {
 
@@ -53,7 +53,11 @@ export const messagesReducer = (state = messagesInitialState, action) => {
             debugger
             let findContact = state.filter((user) => user.id == action.payload)
             return {...state, findContact}
-
+        case
+        LAST_MESSAGE:
+            debugger
+            let lastMessage = state.filter((user) => user.id == action.payload)
+            return {...state}
 
         default:
             return state

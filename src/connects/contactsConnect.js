@@ -1,15 +1,18 @@
 import {connect} from 'react-redux';
-import {allContactListSelector, contactByIdSelector} from "../store/Contacts";
+import {allContactListSelector, contactByIdSelector,lastMessageForContact, stateWithMessageSelector} from "../store/Contacts";
 
 const mapStateToProps = (state) => {
     return {
         contactList: allContactListSelector(state),
+        messageList: stateWithMessageSelector(state),
+
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getContactById: (id) => dispatch(contactByIdSelector(id)),
+        getLastMessageByContactId: (id) => dispatch(lastMessageForContact(id)),
+
     }
 }
 
