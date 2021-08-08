@@ -10,6 +10,7 @@ import {Profile} from "./pages/profile/Profile";
 import {ShowChat} from "./pages/chats/ShowChat";
 import {PersistGate} from "redux-persist/integration/react";
 import {persistStore} from "redux-persist";
+import Dictionary from "./pages/dictionary/Dictionary";
 
 const persistor = persistStore(store)
 
@@ -26,6 +27,7 @@ let App = () => {
                         <Route exact path="/Profile" component={Profile}/>
                         <Route path="/Chat"
                                render={() => <ShowChat style={{height: 'auto'}}/>}/>
+                        <Route exact path="/Dictionary" component={Dictionary}/>
                     </div>
 
                 </Router>

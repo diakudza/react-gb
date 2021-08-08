@@ -1,4 +1,3 @@
-
 import React from "react";
 import {NavLink} from "react-router-dom"
 import Button from '@material-ui/core/Button';
@@ -9,9 +8,10 @@ const Navbar = (props) => {
     return (
         <div className="flexRow navbar">{/*Навбар*/}
             <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
-                <NavLink to="/" ><Button>НОМЕ</Button>      </NavLink>
-                <NavLink to="/Profile" ><Button>PROFILE</Button>      </NavLink>
-                <NavLink to="/Chat" ><Button>CHATS</Button>      </NavLink>
+                <NavLink to="/"><Button>НОМЕ</Button> </NavLink>
+                <NavLink to="/Profile"><Button>PROFILE</Button> </NavLink>
+                <NavLink to="/Chat"><Button>CHATS</Button> </NavLink>
+                <NavLink to="/Dictionary"><Button>Dictionary</Button></NavLink>
             </ButtonGroup>
         </div>
     );
