@@ -24,15 +24,15 @@ const Form = (props) => {
 
     return (
         <form className="form">
-        <TextField
-          id="outlined-textarea"
-          placeholder="Ваше сообщение"
-          size="small"
-          variant="outlined"
-          inputRef={textValue}
-        />
+            <TextField
+                id="outlined-textarea"
+                placeholder="Ваше сообщение"
+                size="small"
+                variant="outlined"
+                inputRef={textValue}
+            />
 
-           <Button variant="contained" onClick={setMessage} color="primary">
+            <Button variant="contained" onClick={setMessage} color="primary">
                 Отправить
             </Button>
         </form>

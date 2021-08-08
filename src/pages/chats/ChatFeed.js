@@ -3,31 +3,63 @@ import Message from "./MessageList/Message/Message";
 import React from "react";
 import "../../App.css"
 import Form from "./MessageList/Form/Form";
+import {v4 as uuidv4} from "uuid";
+import {messagesConnect} from "../../connects/messagesConnect";
 
-export const ChatFeed = (props) => {
-    console.log(props)
+const ChatFeedRender = ({sendMessage, removeMessage, dialogState, messageState, getDialogById}) => {
+
     let {id} = useParams();
     if (id === undefined) {
         id = 110
     }
-    let MessList = props.state.map((mes, index) => <Message key={index}
-                                                            messages={mes.text}
-                                                            author={mes.author}
-                                                            id={mes.id}
-                                                            im={mes.im}
-                                                            removeItem={props.removeItem}/>).reverse()
+
+    let setMessageAdd = (message) => {
+        sendMessage({chatID: id, messageId: uuidv4(), author: 100, text: message})
+    }
+
+    let removeChatMessage = (chatId, messageId) => {
+        removeMessage(chatId, messageId)
+    }
+
+    let messegeForCurrentContact = (id) => {
+        //debugger
+        let arrayOfmessageForUser = Object.entries(messageState).filter((contact) => contact[0] == id)
+        return arrayOfmessageForUser[0][1]
+    }
+
+    const findContactById = (id) => {
+        if (id === undefined) {
+            id = 110
+        }
+        if (id === 100) {
+            return 'Я'
+        }
+
+        let arrayOfmessageForUser = Object.entries(dialogState).filter((contact) => contact[0] == id)
+
+        return arrayOfmessageForUser[0][1].author
+    }
+
+
+    let MessList = messegeForCurrentContact(id).map((mes, index) => <Message key={index}
+                                                                             messages={mes.text}
+                                                                             author={mes.author}
+                                                                             id={mes.messageId}
+                                                                             chatid={id}
+                                                                             findContactById={findContactById}
+                                                                             removeChatMessage={removeChatMessage}/>).reverse()
 
     return (
-        <div className="padding20 messageList">
+        <div className="messageList">
             <div className="flexCol messageHeight">
-                <h2>Chat: {props.friend[id].author}</h2>
-                   {props.state[1] && MessList}
+                <h2>Chat: {dialogState[id].author}</h2>
+                {MessList}
             </div>
-            <Form setMessageAdd={props.setMessageAdd}
+            <Form setMessageAdd={setMessageAdd}
                   id={id}
-                  author={props.friend[id].author}/>
-
-
+                  author={dialogState[id].author}/>
         </div>
     )
 };
+
+export const ChatFeed = messagesConnect(ChatFeedRender)
