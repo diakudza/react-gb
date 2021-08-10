@@ -1,51 +1,32 @@
 import React from "react";
 
 export const Word = (props) => {
+    let arrOfDef = []
+    if (!props.data.error) {
 
-    console.log(props.data)
-    let startState = {
-        definition: false,
-        arrOfDef: false,
-        antonyms: '',
-        genus: '',
-        word: '',
-        error: '',
-    }
-
-    if (props.data != undefined) { // не пойму почему 3 раза делает запрос. Первый undefined, поэтому прикрутил такой костыль
-
-        if (!props.data.message) {
+        console.log(props.data)
+        if (props.data.definition.length > 1) {
             debugger
-            console.log(props.data)
-            startState.word = props.data[0].word
-            startState.definition = props.data[0].meanings[0].definitions
-            startState.genus = props.data[0].meanings[0].partOfSpeech
-            startState.antonyms = startState.definition[0].antonyms[0]
-            startState.error = '';
-
-            if (startState.definition.isArray) {
-                startState.arrOfDef = startState.definition.definition.map((def, id) => {
-                    <p key={id}>{def}</p>
-                })
-            } else {
-                startState.arrOfDef = startState.definition[0].definition
-
-            }
-        } else {
+            arrOfDef = Object.entries(props.data.definition).map((element, id) =>
+                <div> {element[1].definition} </div>
+            )
+            console.log(arrOfDef[0])
+        }
+    else
+        {
             debugger
-            startState.error = props.data.title
+            arrOfDef = props.data.definition[0].definition
         }
     }
 
-
     return (
         <>
-            {startState.definition && <p>Слово: {startState.word} </p>}
-            {startState.genus && <p>Род: {startState.genus} </p>}
-            {startState.definition && <p>Значение: {startState.arrOfDef} </p>}
-            {startState.antonyms && <p>Антоним: {startState.antonyms} </p>}
-            {startState.error && <p>Ошибка: {startState.error} </p>}
+            {props.data.definition && <p>Слово: {props.data.word} </p>}
+            {props.data.genus && <p>Род: {props.data.genus} </p>}
+            {props.data.definition && <p>Значение: {arrOfDef} </p>}
+            {props.data.antonyms && <p>Антоним: {props.data.antonyms} </p>}
+            {props.data.error && <p>Ошибка: {props.data.error} </p>}
 
         </>
     );
-}
+    }

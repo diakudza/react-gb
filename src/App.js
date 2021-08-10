@@ -10,8 +10,7 @@ import {Profile} from "./pages/profile/Profile";
 import {ShowChat} from "./pages/chats/ShowChat";
 import {PersistGate} from "redux-persist/integration/react";
 import {persistStore} from "redux-persist";
-import Dictionary from "./pages/dictionary/Dictionary";
-
+import {Dictionary} from "./pages/dictionary/Dictionary";
 const persistor = persistStore(store)
 
 let App = () => {

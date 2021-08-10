@@ -3,11 +3,9 @@ import {Button, TextField} from "@material-ui/core";
 import {Word} from "./word";
 import {useRequestApi} from "../../hooks/api/useRequestApi";
 import {wordApi} from "../../api";
+import {dictionaryConnect} from "../../connects/dictionaryConnect"
 
-const Dictionary = () => {
-
-    const [ShowWordResult, setShowWordResult] = useState(false);
-    const [WordForSearch, setWordForSearch] = useState('');
+export const DictionaryRender = ({word, MessageRequest, showResult, resetDictionaryStore}) => {
 
     let textValue = React.useRef();
 
@@ -17,19 +15,20 @@ const Dictionary = () => {
 
     const getWordState = useRequestApi({
         api: wordApi.getRuWord,
-
     })
 
     const sendValueToComponent = (event) => {
-        setShowWordResult(true)
-        setWordForSearch(textValue.current.value)
-        getWordState.request(textValue.current.value)
+        MessageRequest(textValue.current.value)
     }
-
+    const resetSearch = (event) => {
+        resetDictionaryStore()
+        textValue.current.value = ''
+    }
     return (
         <div className="padding020">
 
             <h2>Словарь</h2>
+
             <p>Введите слово, что бы узнать его значение</p>
 
             <div className="flexRow">
@@ -40,16 +39,16 @@ const Dictionary = () => {
                     placeholder="Введите слово.."
                 />
                 <Button onClick={sendValueToComponent}>Запрос</Button>
+                <Button onClick={resetSearch}>Сброс</Button>
             </div>
 
             {getWordState.isLoading && <div>loading ...</div>}
             {getWordState.isError && <div>error</div>}
-
-            {ShowWordResult && <Word word={WordForSearch} data={getWordState.data}/>}
-
+            {word.showResult && <Word data={word}/>}
+            {word.error && <p>Нет такого слова в базе</p>}
 
         </div>
     );
 }
 
-export default Dictionary;
+export const Dictionary = dictionaryConnect(DictionaryRender);

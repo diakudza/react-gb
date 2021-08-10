@@ -7,6 +7,6 @@ export const attempt = async (url, config) => {
         return [null, result];
     } catch (e) {
         console.warn(e);
-        return [e,null];
+        return [e, null];
     }
 }

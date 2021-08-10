@@ -5,8 +5,10 @@ import {PersistGate} from 'redux-persist/integration/react'
 import {profileReducer} from "./profile"
 import {contactsReducer} from "./Contacts";
 import {messagesReducer, SEND_MESSAGE, sendMessage} from "./Messages";
+import {dictionaryReducer} from "./Dictionary"
 import thunk from 'redux-thunk';
 import {v4 as uuidv4} from "uuid";
+//import {dictionaryConnect} from "../connects/dictionaryConnect";
 
 const persistConfig = {
     key: 'root',
@@ -17,13 +19,14 @@ const rootReducer = combineReducers({
     profile: profileReducer,
     contacts: contactsReducer,
     messages: messagesReducer,
+    dictionary:dictionaryReducer,
 })
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const addAnswerAutoMessege = (store) => (dispatch) => (action) => {
 
     if (action.type == SEND_MESSAGE) {
-        console.log(store, action)
+        //console.log(store, action)
         if (action.payload.author == 100) {
             setTimeout(() => dispatch(sendMessage({
                 chatID: action.payload.chatID,
