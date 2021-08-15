@@ -27,9 +27,11 @@ a {
 }
 
 .navbar {
-  padding: 11px 0 0 23px;
+  padding: 11px 23px;
   height: 30px;
   background-color: #f3e6faf5;
+  display: flex;
+  justify-content: space-between;
 }
 
 .flexRow {

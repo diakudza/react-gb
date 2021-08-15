@@ -1,24 +1,20 @@
-import {SEND_MESSAGE, GET_ALL_MESSAGES, REMOVE_MESSAGES, GET_DIALOG_BY_ID, LAST_MESSAGE} from "./action";
+import {
+    SEND_MESSAGE,
+    GET_ALL_MESSAGES,
+    REMOVE_MESSAGES,
+    GET_DIALOG_BY_ID,
+    LAST_MESSAGE,
+    ADD_CHATS_FROM_DB
+} from "./action";
 
-const messagesInitialState = {
-
-    101: [{messageId: 112, author: 101, text: 'Хелло'}, {messageId: 113, author: 100, text: 'Как сам?'},
-        {messageId: 114, author: 101, text: 'Огонь'}],
-    102: [{messageId: 111, author: 102, text: 'Ку'}],
-    103: [{messageId: 111, author: 103, text: 'Ку'}],
-    104: [{messageId: 111, author: 104, text: 'Хай'}, {messageId: 112, author: 100, text: 'Привет)'}],
-    105: [{messageId: 111, author: 105, text: 'Ку'}],
-    106: [{messageId: 111, author: 106, text: 'Здарова, Мижго'}],
-    107: [{messageId: 111, author: 107, text: 'Ку'}],
-    110: [{messageId: 111, author: 110, text: 'Как делы?'}],
-}
+const messagesInitialState = {}
 
 export const messagesReducer = (state = messagesInitialState, action) => {
 
     switch (action.type) {
 
         case SEND_MESSAGE:
-            //debugger
+            debugger
             let index = action.payload.chatID
             return {
                 ...state,
@@ -29,16 +25,16 @@ export const messagesReducer = (state = messagesInitialState, action) => {
                         text: action.payload.text
                     }
                 ]
-
             }
+
 
         case
         REMOVE_MESSAGES:
-            let dialogWhitCurrentContact = Object.entries(state).filter(chat => chat[0] == action.payload)
-            let messageForRemove = dialogWhitCurrentContact[0][1].filter(message => message.messageId !== action.messageId)
+            debugger
+            // let dialogWhitCurrentContact = Object.entries(state).filter(chat => chat[0] == action.payload)
+            // let messageForRemove = dialogWhitCurrentContact[0][1].filter(message => message.messageId !== action.messageId)
             return {
-                ...state,
-                [action.payload]: messageForRemove
+                ...state
 
             }
 
@@ -58,6 +54,15 @@ export const messagesReducer = (state = messagesInitialState, action) => {
             debugger
             let lastMessage = state.filter((user) => user.id == action.payload)
             return {...state}
+
+        case
+        ADD_CHATS_FROM_DB:
+            debugger
+            console.log(action.payload)
+            state = action.payload
+            return {
+                ...state
+            }
 
         default:
             return state

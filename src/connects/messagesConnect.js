@@ -1,11 +1,11 @@
 import {connect} from 'react-redux';
 import {
     sendMessage,
-    removeMessage,
+    removeMessageFromDB,
     stateSelector,
     getDialogById,
     stateWithMessageSelector,
-    lastMessage
+    lastMessage, removeMessageFrom,
 } from "../store/Messages";
 
 const mapStateToProps = (state) => {
@@ -19,9 +19,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         sendMessage: (id) => dispatch(sendMessage(id)),
-        removeMessage: (chatid, id) => dispatch(removeMessage(chatid, id)),
+        removeMessage: (chatid, id) => dispatch(removeMessageFrom(chatid, id)),
         getDialogById: (id) => dispatch(getDialogById(id)),
         getLastMessage: (id) => dispatch(lastMessage(id)),
+
     }
 }
 

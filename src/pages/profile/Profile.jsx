@@ -2,12 +2,6 @@ import React from "react";
 import {profileConnect} from "../../connects/profileConnect"
 
 export const ProfileRender = ({status,change}) => {
-    // const checked = useSelector((store) => store.checked)
-    // const dispatch = useDispatch()
-    console.log(status)
-    // const showStatus = () => {
-    //     dispatch(showCheckBoxStatus())
-    // }
 
     return (
         <div className='padding020'>
