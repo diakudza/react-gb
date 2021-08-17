@@ -22,12 +22,14 @@ const ChatFeedRender = ({sendMessage, removeMessage, dialogState, messageState, 
     }
 
     let messegeForCurrentContact = (id) => {
-        //debugger
+
         let arrayOfmessageForUser = Object.entries(messageState).filter((contact) => contact[0] == id)
+        console.log(arrayOfmessageForUser[0][1])
         return arrayOfmessageForUser[0][1]
     }
 
     const findContactById = (id) => {
+        //debugger
         if (id === undefined) {
             id = 110
         }
@@ -37,27 +39,27 @@ const ChatFeedRender = ({sendMessage, removeMessage, dialogState, messageState, 
 
         let arrayOfmessageForUser = Object.entries(dialogState).filter((contact) => contact[0] == id)
 
-        return arrayOfmessageForUser[0][1].author
+        return arrayOfmessageForUser[0][1][0].author
     }
 
 
-    let MessList = messegeForCurrentContact(id).map((mes, index) => <Message key={index}
-                                                                             messages={mes.text}
-                                                                             author={mes.author}
-                                                                             id={mes.messageId}
-                                                                             chatid={id}
-                                                                             findContactById={findContactById}
-                                                                             removeChatMessage={removeChatMessage}/>).reverse()
+    let MessList = Object.entries(messegeForCurrentContact(id)).map((mes, index) => <Message key={index}
+                                                                                             messages={mes[1].text}
+                                                                                             author={mes[1].author}
+                                                                                             id={mes[0]}
+                                                                                             chatid={id}
+                                                                                             findContactById={findContactById}
+                                                                                             removeChatMessage={removeChatMessage}/>).reverse()
 
     return (
         <div className="messageList">
             <div className="flexCol messageHeight">
-                <h2>Chat: {dialogState[id].author}</h2>
+                <h2>Chat: {dialogState[id][0].author}</h2>
                 {MessList}
             </div>
             <Form setMessageAdd={setMessageAdd}
                   id={id}
-                  author={dialogState[id].author}/>
+                  author={dialogState[id][0].author}/>
         </div>
     )
 };

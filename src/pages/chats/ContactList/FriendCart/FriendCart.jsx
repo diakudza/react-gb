@@ -7,9 +7,10 @@ import Avatar from '@material-ui/core/Avatar';
 import {NavLink} from "react-router-dom";
 
 const FriendCart = (props) => {
-      return (
+
+    return (
         <>
-           <NavLink to={"/Chat/"+props.id} >
+            <NavLink to={"/Chat/" + props.id}>
                 <ListItem alignItems="flex-start">
                     <ListItemAvatar>
                         <Avatar alt={props.author} src={"../../userpic/" + props.ava}/>
